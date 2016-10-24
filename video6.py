@@ -4,14 +4,21 @@ import os
 
 cap = cv2.VideoCapture(0)
 
+width = 1280 
+height = 720
+
+# устанавливаем нужное разрешение
+cap.set(3,width)
+cap.set(4,height)
+
 # выбор кодека и параметры исходного видео
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('demo.avi',fourcc, 10.0, (640,480))
+out = cv2.VideoWriter('demo.avi',fourcc, 10.0, (width, height))
 
 # счетчик кадров
 i = 0
 
-# границы желаемого цвеа
+# границы желаемого цвеай
 # lower, upper =  ([25, 5, 58], [50, 36, 85]) #красный
 # lower, upper =  ([238, 190, 71], [255, 255, 90]) #ярко синий
 # lower, upper =  ([239, 250, 239], [255, 255, 255]) #зелено белый
@@ -23,7 +30,7 @@ upper = np.array(upper, dtype = "uint8")
 
 
 while(cap.isOpened()):
-	# захватываем видео покадрово
+    # захватываем видео покадрово
     ret, frame = cap.read()
     
     # делаем нашу маску по цвету
@@ -52,7 +59,7 @@ while(cap.isOpened()):
 
     # Режим только рисунок
     # cv2.imshow('frame',output_sum)
-    
+
 
     # Дополнительно сохраняем кадры в папку images
     img_dir = 'images'
