@@ -61,23 +61,17 @@ while(cap.isOpened()):
 
     # прибавляем кадр и маску
     frame = cv2.add(frame,output_sum)
-
-
-
-
-    # отображаем результат
-    if reg == 0:
-        cv2.imshow('frame',frame)
-    elif reg == 1:
+   
+   
+    if reg == 1:
         # Режим только рисунок
-        cv2.imshow('frame',output_sum)
+        frame = output_sum
     elif reg == 2:
         # Режим рисования на картинке
-        img_a = cv2.add(img,output_sum)
-        cv2.imshow('frame',img_a)
+        frame = cv2.add(img,output_sum)
 
-
-
+    # отображаем результат
+    cv2.imshow('frame',frame)
 
     # Дополнительно сохраняем кадры в папку images
     img_dir = 'images'
