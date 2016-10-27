@@ -71,7 +71,7 @@ while(cap.isOpened()):
     elif reg == 1:
         # Режим только рисунок
         cv2.imshow('frame',output_sum)
-    elif reg == 3:
+    elif reg == 2:
         # Режим рисования на картинке
         img_a = cv2.add(img,output_sum)
         cv2.imshow('frame',img_a)
@@ -106,7 +106,7 @@ while(cap.isOpened()):
         reg = 0
 
     if cv2.waitKey(1) & 0xFF == ord('i'):
-        reg = 3
+        reg = 2
 
 
 
