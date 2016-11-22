@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import os
+import pr
 
 # картинка по размеру экрана (640 x 480)
 img = cv2.imread('f1.jpg',1)
@@ -24,6 +25,7 @@ out = cv2.VideoWriter('demo.avi',fourcc, 10.0, (width, height))
 # счетчик кадров
 i = 0
 
+
 # режимы 0 обычный, 1 только рисунок, 2 наложение на картинку
 reg = 0
 
@@ -32,7 +34,7 @@ reg = 0
 # lower, upper =  ([25, 5, 58], [50, 36, 85]) #красный
 # lower, upper =  ([238, 190, 71], [255, 255, 90]) #ярко синий
 # lower, upper =  ([239, 250, 239], [255, 255, 255]) #зелено белый
-lower, upper =  ([120, 250, 114], [255, 255, 254])
+lower, upper =  ([120, 250, 114], [255, 255, 255])
 # преобразование границ в numpy формат
 lower = np.array(lower, dtype = "uint8")
 upper = np.array(upper, dtype = "uint8")
@@ -70,6 +72,8 @@ while(cap.isOpened()):
         # Режим рисования на картинке
         frame = cv2.add(img,output_sum)
 
+
+
     # отображаем результат
     cv2.imshow('frame',frame)
 
@@ -101,6 +105,17 @@ while(cap.isOpened()):
 
     if cv2.waitKey(1) & 0xFF == ord('i'):
         reg = 2
+
+    # найти черные цифр
+    if cv2.waitKey(1) & 0xFF == ord('h'):
+        im = pr.recognite(frame,1)
+        cv2.imshow("Result",im)
+
+    # найти белые цифры
+    if cv2.waitKey(1) & 0xFF == ord('g'):
+        im = pr.recognite(frame,0)
+        cv2.imshow("Result",im)
+
 
 
 
